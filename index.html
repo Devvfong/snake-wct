@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Snake Game — Desktop</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="wrap container">
+    <div class="card card-game">
+      <div class="game-header">
+        <h1>Snake — Desktop</h1>
+        <div class="game-toolbar" role="toolbar" aria-label="Game controls">
+          <!-- reuse the panel buttons (kept in panel for JS) but provide quick toolbar copy that triggers same actions -->
+          <button id="startBtn-tool" class="btn primary">Start / Restart</button>
+          <button id="pauseBtn-tool" class="btn">Pause</button>
+          <button id="muteBtn-tool" class="btn">Mute</button>
+        </div>
+      </div>
+
+      <!-- note: no width/height attributes here; size will be set by JS -->
+      <canvas id="game" aria-label="Snake game canvas"></canvas>
+
+      <div id="gameStatus" class="game-status" aria-live="polite">Ready</div>
+
+      <!-- Touch controls (visible on small screens) -->
+      <div class="touch-controls" aria-hidden="true">
+        <button id="btn-up" class="tc tc-up" aria-label="Up">▲</button>
+        <div class="tc-row">
+          <button id="btn-left" class="tc tc-left" aria-label="Left">◀</button>
+          <button id="btn-down" class="tc tc-down" aria-label="Down">▼</button>
+          <button id="btn-right" class="tc tc-right" aria-label="Right">▶</button>
+        </div>
+      </div>
+      <div class="info">Controls: <strong>Arrow keys</strong> or <strong>WASD</strong>. Press <strong>P</strong> to
+        pause, <strong>M</strong> to mute, <strong>F</strong> to toggle fullscreen. Press <strong>Space</strong> or
+        <strong>Enter</strong> to start.
+      </div>
+      <div class="footer small">Responsive and accessible UI. Touch controls appear on narrow screens.</div>
+    </div>
+
+    <div class="card card-panel">
+      <h1>Game Panel</h1>
+
+      <div class="stats">
+        <div class="stat">Score: <span id="score">0</span></div>
+        <div class="stat">Level: <span id="level">1</span></div>
+        <div class="stat">Speed: <span id="speed">6</span></div>
+        <div class="stat">Highscore: <span id="best">0</span></div>
+      </div>
+
+      <div class="controls">
+        <!-- Primary control buttons (used by JS) -->
+        <button id="startBtn">Start / Restart</button>
+        <button id="pauseBtn">Pause</button>
+        <button id="muteBtn">Mute</button>
+      </div>
+
+      <div class="explain">
+        <strong>How it works:</strong>
+        <ul>
+          <li>Grid-based snake moves and grows when eating food.</li>
+          <li>Collision with walls or itself = game over.</li>
+          <li>Speed increases every 5 food to make it challenging.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="overlay" class="overlay" style="display:none">
+    <div class="msg" id="msgBox">
+      <div id="msgText"><strong>Press Start to play!</strong></div>
+      <div style="margin-top:10px" class="small">Keyboard controls only (Arrow keys / WASD).</div>
+      <div style="margin-top:12px"><button id="overlayStart">Start</button></div>
+    </div>
+  </div>
+
+  <script type="module" src="game.js"></script>
+</body>
+
+</html>

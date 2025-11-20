@@ -1,0 +1,258 @@
+:root {
+    --bg: #071428;
+    --panel: #0f1724;
+    --accent: #16a34a;
+    --muted: #94a3b8;
+}
+
+.container {
+    width: 1200px;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+    color: #e6eef6;
+    background: linear-gradient(180deg, #071428, #021017);
+}
+
+.wrap {
+    max-width: 1100px;
+    margin: 28px auto;
+    padding: 22px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(2, 8, 23, 0.6);
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 18px;
+    align-items: start;
+}
+
+.card {
+    background: var(--panel);
+    padding: 16px;
+    border-radius: 10px;
+    color: #d8e6f2
+}
+
+.game-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.game-toolbar {
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    color: #cfe8d6;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn.primary {
+    background: linear-gradient(180deg, var(--accent), #0f7a3c);
+    border: 0;
+    color: #041008;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+
+.card-game {
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    margin: 0 0 10px 0;
+    font-size: 20px
+}
+
+/* canvas: allow JS to fully control pixel size; use CSS for layout */
+canvas {
+    background: #07192a;
+    border-radius: 8px;
+    display: block;
+    margin: 12px auto;
+    border: 4px solid rgba(255, 255, 255, 0.03);
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+}
+
+/* UI */
+.info {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 8px
+}
+
+.stats {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px
+}
+
+.stat {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-weight: 600
+}
+
+button {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: #cfe8d6;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer
+}
+
+.controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    align-items: center;
+}
+
+.footer {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 12px
+}
+
+.overlay {
+    position: fixed;
+    left: 0;
+
+    .game-status {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 14px;
+        text-align: center;
+    }
+
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none
+}
+
+.msg {
+    background: linear-gradient(180deg, rgba(7, 20, 34, 0.95), rgba(2, 8, 23, 0.95));
+    color: #e6f8ea;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 18px 22px;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(2, 8, 23, 0.7);
+    text-align: center;
+    pointer-events: auto
+}
+
+.small {
+    font-size: 13px;
+    color: var(--muted)
+}
+
+/* -------- Fullscreen / presentation styling -------- */
+.app-fullscreen .wrap {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    grid-template-columns: 1fr;
+    /* single column: only canvas */
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+}
+
+.app-fullscreen .card {
+    background: transparent;
+    padding: 12px;
+    border-radius: 0
+}
+
+.app-fullscreen .card-panel {
+    display: none
+}
+
+/* hide right panel */
+.app-fullscreen canvas {
+    width: 100vw !important;
+    height: 100vh !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+}
+
+/* small screens keep layout usable */
+@media (max-width:1000px) {
+    .wrap {
+        grid-template-columns: 1fr;
+        padding: 14px
+    }
+
+    canvas {
+        width: 100%;
+        height: auto
+    }
+}
+
+/* Touch controls styling (mobile) */
+.touch-controls {
+    display: none;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 18px;
+    z-index: 60;
+    pointer-events: auto;
+}
+
+.touch-controls .tc {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    color: #e6eef6;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 20px;
+}
+
+.touch-controls .tc-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    justify-content: center;
+}
+
+@media (max-width:700px) {
+    .touch-controls {
+        display: block;
+    }
+
+    canvas {
+        height: calc(100vh - 240px);
+    }
+}
