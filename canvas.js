@@ -3,7 +3,8 @@ var canvas = document.getElementById("canvas"),
   scoreIs = document.getElementById("score"),
   direction = "",
   directionQueue = "",
-  fps = 70,
+  defaultFPS = 40, // default delay (ms) base for speed control
+  fps = defaultFPS, // this fps is not frame per second bro it for speeed in mil
   snake = [],
   snakeLength = 5,
   cellSize = 20,
@@ -342,6 +343,18 @@ function game() {
     spawnFoodItem();
     pick.play();
     score += 10;
+
+    // === SPEED ADJUSTMENT: make snake faster as score increases ===
+    // fps is delay in ms. smaller = faster.
+    // newFps reduces delay by (score/2) but never below 10ms.
+    const newFps = Math.max(10, defaultFPS - score / 2);
+    if (newFps !== fps) {
+      fps = newFps;
+      if (loop) {
+        clearInterval(loop);
+        loop = setInterval(game, fps);
+      }
+    }
   }
 
   ctx.beginPath();
@@ -365,6 +378,10 @@ function newGame() {
   }
   score = 0;
   scoreIs.innerHTML = score;
+
+  // reset speed to default when starting a new game
+  fps = defaultFPS;
+
   loop = setInterval(game, fps);
   isRunning = true;
 }
