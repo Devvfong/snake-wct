@@ -3,8 +3,8 @@ var canvas = document.getElementById("canvas"),
   scoreIs = document.getElementById("score"),
   direction = "",
   directionQueue = "",
-  defaultFPS = 40, // default delay (ms) base for speed control
-  fps = defaultFPS, // this fps is not frame per second bro it for speeed in mil
+  defaultFPS = 70, // default delay (ms) base for speed control
+  fps = defaultFPS,
   snake = [],
   snakeLength = 5,
   cellSize = 20,
@@ -145,6 +145,7 @@ function drawSnake() {
   }
   drawHead(snake[0].x, snake[0].y);
 }
+
 function drawRoundedBody(x, y, color) {
   ctx.fillStyle = color;
   const r = cellSize * 0.3; // corner radius
@@ -346,8 +347,9 @@ function game() {
 
     // === SPEED ADJUSTMENT: make snake faster as score increases ===
     // fps is delay in ms. smaller = faster.
-    // newFps reduces delay by (score/2) but never below 10ms.
-    const newFps = Math.max(10, defaultFPS - score / 2);
+    // newFps reduces delay by (score/2) but never below 20ms.
+    // make snake faster as score increases — fps is delay in ms
+    const newFps = Math.max(20, defaultFPS - score / 2);
     if (newFps !== fps) {
       fps = newFps;
       if (loop) {
